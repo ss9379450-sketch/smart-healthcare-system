@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Login | MediCare+</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #eaf6f7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px #00000015;
+        }
+
+        h1 {
+            color: #087e8b;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #667788;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            border: 1px solid #ccd5dc;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 22px;
+            background: #087e8b;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #087e8b;
+            text-decoration: none;
+        }
+
+        #message {
+            text-align: center;
+            color: #087e8b;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+        <h1>MediCare+</h1>
+        <p class="subtitle">Your Health, Our Priority</p>
+
+        <h2>Patient Login</h2>
+
+        <form id="loginForm">
+
+            <label>Email Address</label>
+            <input type="email" id="email"
+                   placeholder="Enter your email" required>
+
+            <label>Password</label>
+            <input type="password" id="password"
+                   placeholder="Enter your password" required>
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <p id="message"></p>
+
+        <a href="index.html" class="back">
+            Back to Home
+        </a>
+    </div>
+
+    <script>
+        document.getElementById("loginForm")
+        .addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            document.getElementById("message").textContent =
+                "Login interface ready! Account authentication will be connected next.";
+        });
+    </script>
+
+</body>
+</html>
