@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Login | MediCare+</title>
+
     <style>
         * {
             box-sizing: border-box;
@@ -66,6 +67,11 @@
             font-size: 16px;
         }
 
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         .back {
             display: block;
             text-align: center;
@@ -100,24 +106,76 @@
             <input type="password" id="password"
                    placeholder="Enter your password" required>
 
-            <button type="submit">Login</button>
+            <button type="submit" id="loginBtn">Login</button>
 
         </form>
 
-        <p id="message"></p>
+        <p id="message" role="status"></p>
 
         <a href="index.html" class="back">
             Back to Home
         </a>
     </div>
 
-    <script>
-        document.getElementById("loginForm")
-        .addEventListener("submit", function(event) {
+    <script type="module">
+        import { auth } from "./firebase.js";
+
+        import {
+            signInWithEmailAndPassword
+        } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+
+        const loginForm = document.getElementById("loginForm");
+        const message = document.getElementById("message");
+        const loginBtn = document.getElementById("loginBtn");
+
+        loginForm.addEventListener("submit", async function(event) {
+
             event.preventDefault();
 
-            document.getElementById("message").textContent =
-                "Login interface ready! Account authentication will be connected next.";
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            message.textContent = "";
+            loginBtn.disabled = true;
+            loginBtn.textContent = "Logging in...";
+
+            try {
+
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+                message.textContent = "Login successful! Opening dashboard...";
+
+                setTimeout(function() {
+                    window.location.href = "dashboard.html";
+                }, 1000);
+
+            } catch (error) {
+
+                if (error.code === "auth/invalid-credential" ||
+                    error.code === "auth/wrong-password" ||
+                    error.code === "auth/user-not-found") {
+
+                    message.textContent = "Incorrect email or password.";
+
+                } else if (error.code === "auth/too-many-requests") {
+
+                    message.textContent = "Too many attempts. Please try again later.";
+
+                } else {
+
+                    message.textContent = "Login failed: " + error.message;
+                }
+
+            } finally {
+
+                loginBtn.disabled = false;
+                loginBtn.textContent = "Login";
+            }
+
         });
     </script>
 
