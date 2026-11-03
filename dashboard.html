@@ -18,6 +18,10 @@
             color: #243447;
         }
 
+        #app {
+            display: none;
+        }
+
         header {
             background: #087e8b;
             color: white;
@@ -25,15 +29,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         header h2 {
             margin: 0;
         }
 
-        header a {
-            color: white;
-            text-decoration: none;
+        header button {
+            background: white;
+            color: #087e8b;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
         }
 
         .welcome {
@@ -80,7 +90,7 @@
             line-height: 1.5;
         }
 
-        button {
+        .card button {
             background: #087e8b;
             color: white;
             border: none;
@@ -89,7 +99,7 @@
             cursor: pointer;
         }
 
-        button:hover {
+        .card button:hover {
             background: #05616b;
         }
 
@@ -99,6 +109,11 @@
             color: white;
             padding: 20px;
             margin-top: 30px;
+        }
+
+        #status {
+            text-align: center;
+            padding: 30px;
         }
 
         @media(max-width: 750px) {
@@ -117,88 +132,141 @@
 
 <body>
 
-    <header>
-        <h2>MediCare+</h2>
-        <a href="index.html">Logout / Home</a>
-    </header>
+    <p id="status">Checking login...</p>
 
-    <section class="welcome">
-        <h1>Welcome to Your Dashboard!</h1>
-        <p>Manage your healthcare services in one place.</p>
-    </section>
+    <div id="app">
 
-    <section class="dashboard">
+        <header>
+            <h2>MediCare+</h2>
+            <button id="logoutBtn">Logout</button>
+        </header>
 
-        <h2>Patient Services</h2>
+        <section class="welcome">
+            <h1 id="welcomeName">Welcome!</h1>
+            <p>Manage your healthcare services in one place.</p>
+            <p id="userEmail"></p>
+        </section>
 
-        <div class="cards">
+        <section class="dashboard">
 
-            <div class="card">
-                <div class="icon">💊</div>
-                <h3>Medicine Reminder</h3>
-                <p>Manage your daily medicine schedule.</p>
-                <button onclick="showFeature('Medicine Reminder')">
-                    Open
-                </button>
+            <h2>Patient Services</h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="icon">💊</div>
+                    <h3>Medicine Reminder</h3>
+                    <p>Manage your daily medicine schedule.</p>
+                    <button onclick="showFeature('Medicine Reminder')">Open</button>
+                </div>
+
+                <div class="card">
+                    <div class="icon">👨‍⚕️</div>
+                    <h3>Doctor Appointment</h3>
+                    <p>Explore doctor appointment services.</p>
+                    <button onclick="showFeature('Doctor Appointment')">Open</button>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🤖</div>
+                    <h3>AI Health Assistant</h3>
+                    <p>Explore general health information.</p>
+                    <button onclick="showFeature('AI Health Assistant')">Open</button>
+                </div>
+
+                <div class="card">
+                    <div class="icon">📋</div>
+                    <h3>Health Records</h3>
+                    <p>Explore your health history section.</p>
+                    <button onclick="showFeature('Health Records')">Open</button>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🚚</div>
+                    <h3>Medicine Delivery</h3>
+                    <p>Explore medicine delivery services.</p>
+                    <button onclick="showFeature('Medicine Delivery')">Open</button>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🌐</div>
+                    <h3>Language Settings</h3>
+                    <p>Explore multilingual support.</p>
+                    <button onclick="showFeature('Language Settings')">Open</button>
+                </div>
+
             </div>
+        </section>
 
-            <div class="card">
-                <div class="icon">👨‍⚕️</div>
-                <h3>Doctor Appointment</h3>
-                <p>Explore doctor appointment services.</p>
-                <button onclick="showFeature('Doctor Appointment')">
-                    Open
-                </button>
-            </div>
+        <footer>
+            <p>MediCare+ | Smart Healthcare Project 2026</p>
+            <p>Educational demonstration only.</p>
+        </footer>
 
-            <div class="card">
-                <div class="icon">🤖</div>
-                <h3>AI Health Assistant</h3>
-                <p>Explore general health information.</p>
-                <button onclick="showFeature('AI Health Assistant')">
-                    Open
-                </button>
-            </div>
+    </div>
 
-            <div class="card">
-                <div class="icon">📋</div>
-                <h3>Health Records</h3>
-                <p>Explore your health history section.</p>
-                <button onclick="showFeature('Health Records')">
-                    Open
-                </button>
-            </div>
+    <script type="module">
 
-            <div class="card">
-                <div class="icon">🚚</div>
-                <h3>Medicine Delivery</h3>
-                <p>Explore medicine delivery services.</p>
-                <button onclick="showFeature('Medicine Delivery')">
-                    Open
-                </button>
-            </div>
+        import { auth } from "./firebase.js";
 
-            <div class="card">
-                <div class="icon">🌐</div>
-                <h3>Language Settings</h3>
-                <p>Explore multilingual support.</p>
-                <button onclick="showFeature('Language Settings')">
-                    Open
-                </button>
-            </div>
+        import {
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
 
-        </div>
-    </section>
+        const app = document.getElementById("app");
+        const status = document.getElementById("status");
+        const logoutBtn = document.getElementById("logoutBtn");
 
-    <footer>
-        <p>MediCare+ | Smart Healthcare Project 2026</p>
-        <p>Educational demonstration only.</p>
-    </footer>
+        onAuthStateChanged(auth, function(user) {
 
-    <script>
-        function showFeature(feature) {
+            if (user) {
+
+                const name = user.displayName || "Patient";
+
+                document.getElementById("welcomeName").textContent =
+                    "Welcome, " + name + "!";
+
+                document.getElementById("userEmail").textContent =
+                    "Logged in as: " + user.email;
+
+                status.style.display = "none";
+                app.style.display = "block";
+
+            } else {
+
+                window.location.replace("login.html");
+
+            }
+
+        });
+
+        logoutBtn.addEventListener("click", async function() {
+
+            logoutBtn.disabled = true;
+            logoutBtn.textContent = "Logging out...";
+
+            try {
+
+                await signOut(auth);
+
+                window.location.replace("login.html");
+
+            } catch (error) {
+
+                alert("Logout failed. Please try again.");
+
+                logoutBtn.disabled = false;
+                logoutBtn.textContent = "Logout";
+
+            }
+
+        });
+
+        window.showFeature = function(feature) {
             alert(feature + " section will be developed next!");
-        }
+        };
+
     </script>
 
 </body>
