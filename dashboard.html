@@ -208,21 +208,27 @@
     <script type="module">
 
         import { auth } from "./firebase.js";
-
-        import {
-            onAuthStateChanged,
-            signOut
-        } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
-
+import {
+    onAuthStateChanged,
+    signOut,
+    updateProfile
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+        
         const app = document.getElementById("app");
         const status = document.getElementById("status");
         const logoutBtn = document.getElementById("logoutBtn");
 
-        onAuthStateChanged(auth, function(user) {
+        onAuthStateChanged(auth, async function(user) {
 
             if (user) {
 
-                const name = user.displayName || "Patient";
+                if (!user.displayName) {
+    await updateProfile(user, {
+        displayName: "Testing User"
+    });
+}
+
+const name = user.displayName || "Testing User";
 
                 document.getElementById("welcomeName").textContent =
                     "Welcome, " + name + "!";
