@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard | MediCare+</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f0f7f8;
+            color: #243447;
+        }
+
+        header {
+            background: #087e8b;
+            color: white;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .welcome {
+            padding: 35px 7%;
+            background: white;
+        }
+
+        .welcome h1 {
+            color: #087e8b;
+        }
+
+        .dashboard {
+            padding: 30px 7%;
+        }
+
+        .dashboard h2 {
+            color: #075b68;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-top: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 13px;
+            box-shadow: 0 4px 15px #0000000d;
+        }
+
+        .card .icon {
+            font-size: 38px;
+        }
+
+        .card h3 {
+            color: #087e8b;
+        }
+
+        .card p {
+            color: #667788;
+            line-height: 1.5;
+        }
+
+        button {
+            background: #087e8b;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #05616b;
+        }
+
+        footer {
+            text-align: center;
+            background: #12343b;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        @media(max-width: 750px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 500px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>MediCare+</h2>
+        <a href="index.html">Logout / Home</a>
+    </header>
+
+    <section class="welcome">
+        <h1>Welcome to Your Dashboard!</h1>
+        <p>Manage your healthcare services in one place.</p>
+    </section>
+
+    <section class="dashboard">
+
+        <h2>Patient Services</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">💊</div>
+                <h3>Medicine Reminder</h3>
+                <p>Manage your daily medicine schedule.</p>
+                <button onclick="showFeature('Medicine Reminder')">
+                    Open
+                </button>
+            </div>
+
+            <div class="card">
+                <div class="icon">👨‍⚕️</div>
+                <h3>Doctor Appointment</h3>
+                <p>Explore doctor appointment services.</p>
+                <button onclick="showFeature('Doctor Appointment')">
+                    Open
+                </button>
+            </div>
+
+            <div class="card">
+                <div class="icon">🤖</div>
+                <h3>AI Health Assistant</h3>
+                <p>Explore general health information.</p>
+                <button onclick="showFeature('AI Health Assistant')">
+                    Open
+                </button>
+            </div>
+
+            <div class="card">
+                <div class="icon">📋</div>
+                <h3>Health Records</h3>
+                <p>Explore your health history section.</p>
+                <button onclick="showFeature('Health Records')">
+                    Open
+                </button>
+            </div>
+
+            <div class="card">
+                <div class="icon">🚚</div>
+                <h3>Medicine Delivery</h3>
+                <p>Explore medicine delivery services.</p>
+                <button onclick="showFeature('Medicine Delivery')">
+                    Open
+                </button>
+            </div>
+
+            <div class="card">
+                <div class="icon">🌐</div>
+                <h3>Language Settings</h3>
+                <p>Explore multilingual support.</p>
+                <button onclick="showFeature('Language Settings')">
+                    Open
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>MediCare+ | Smart Healthcare Project 2026</p>
+        <p>Educational demonstration only.</p>
+    </footer>
+
+    <script>
+        function showFeature(feature) {
+            alert(feature + " section will be developed next!");
+        }
+    </script>
+
+</body>
+</html>
